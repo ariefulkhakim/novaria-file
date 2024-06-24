@@ -1,22 +1,23 @@
 "use client";
 import Link from "next/link";
-import { FileBox, LogOut, Settings } from "lucide-react";
+import { FileBox, LogOut } from "lucide-react";
 
 import { DataNavDashboard } from "@/utils/dataNavDashboard";
 import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { OrganizationSwitcher, useAuth, useUser } from "@clerk/nextjs";
-import Image from "next/image";
 import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from "@/components/ui/popover";
+  OrganizationSwitcher,
+  useAuth,
+  useUser,
+  useClerk,
+} from "@clerk/nextjs";
+import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export function Sidebar() {
   const pathname = usePathname();
   const { user } = useUser();
+  const { openUserProfile } = useClerk();
 
   const { signOut } = useAuth();
   const router = useRouter();
@@ -74,58 +75,23 @@ export function Sidebar() {
             />
           </div>
           {user ? (
-            <Popover>
-              <PopoverTrigger asChild>
-                <div className="flex w-full items-center space-x-3 cursor-pointer pl-1 py-1 rounded-lg">
-                  <div>
-                    <Image
-                      src={user?.imageUrl!}
-                      alt="img-avatar"
-                      className="rounded-full"
-                      width={25}
-                      height={25}
-                    />
-                  </div>
-                  <div className="text-zinc-900">
-                    <p className="text-[12px] font-medium">{user?.fullName}</p>
-                  </div>
-                </div>
-              </PopoverTrigger>
-              <PopoverContent className="ml-4 mb-2">
-                <div className="flex flex-col gap-5">
-                  <div className="flex w-full items-center space-x-2">
-                    <div>
-                      <Image
-                        src={user?.imageUrl!}
-                        alt="img-avatar"
-                        className="rounded-full"
-                        width={20}
-                        height={20}
-                      />
-                    </div>
-                    <div className="text-zinc-900">
-                      <p className="text-[14px] font-medium">
-                        {user?.fullName}
-                      </p>
-                      <p className="text-[14px] font-medium">
-                        {user?.emailAddresses[0].emailAddress}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-2 cursor-pointer">
-                    <Settings size={18} />
-                    <p className="text-[14px] font-medium">Manage Accounts</p>
-                  </div>
-                  <div
-                    onClick={() => handleSignOut()}
-                    className="flex items-center space-x-2 cursor-pointer"
-                  >
-                    <LogOut size={18} />
-                    <p className="text-[14px] font-medium">Log Out</p>
-                  </div>
-                </div>
-              </PopoverContent>
-            </Popover>
+            <div
+              onClick={() => openUserProfile()}
+              className="flex w-full items-center space-x-3 cursor-pointer pl-1 py-1 rounded-lg"
+            >
+              <div>
+                <Image
+                  src={user?.imageUrl!}
+                  alt="img-avatar"
+                  className="rounded-full"
+                  width={25}
+                  height={25}
+                />
+              </div>
+              <div className="text-zinc-900">
+                <p className="text-[12px] font-medium">{user?.fullName}</p>
+              </div>
+            </div>
           ) : (
             <div className="flex items-center space-x-2">
               <Skeleton className="h-8 w-8 rounded-full" />

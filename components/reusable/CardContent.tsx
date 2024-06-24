@@ -50,7 +50,7 @@ const CardComponent = ({
         {file.type === "document" && <FileTextIcon className="w-20 h-20" />}
       </CardContent>
       <CardFooter>
-        <div className="flex justify-between items-center w-full mt-3">
+        <div className="flex gap-5 justify-between items-start w-full mt-3">
           <div className="flex gap-1 text-xs text-gray-700 items-center">
             <Avatar className="w-6 h-6">
               <AvatarImage src={userProfile?.image} />
@@ -58,7 +58,7 @@ const CardComponent = ({
             </Avatar>
             {userProfile?.name}
           </div>
-          <div className="text-xs text-gray-700 font-semibold">
+          <div className="text-xs text-gray-700 font-semibold flex-1 text-right">
             Uploaded on{" "}
             {formatRelative(new Date(file._creationTime), new Date())}
           </div>
