@@ -43,7 +43,7 @@ const CardComponent = ({
       </CardHeader>
       <CardContent className="h-[200px] flex justify-center items-center">
         {file.type === "image" && file.url && (
-          <Image alt={file.name} width="200" height="100" src={file.url} />
+          <Image alt={file.name} width="100" height="100" src={file.url} />
         )}
 
         {file.type === "text" && <GanttChartIcon className="w-20 h-20" />}
