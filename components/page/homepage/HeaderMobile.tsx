@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/sheet";
 const HeaderMobile = () => {
   return (
-    <div className="container flex items-center py-6 space-x-0">
+    <div className="container md:hidden flex items-center py-6 space-x-0">
       <Sheet>
         <SheetTrigger>
           <Button size={"icon"}>

@@ -38,9 +38,9 @@ const ServiceScreen = () => {
   ];
   return (
     <div id="service" className="my-40">
-      <div className="container px-16">
+      <div className="container px-4 md:px-16">
         <h2 className="text-[32px] font-semibold text-center">Our Services</h2>
-        <div className="grid grid-cols-4 gap-5 mt-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
           {ContentService.map((item) => (
             <Card key={item.id}>
               <CardHeader className="flex flex-col items-center gap-4">

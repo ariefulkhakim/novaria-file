@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
-import { FileBox, SquareMenu } from "lucide-react";
+import React, { useRef, useState } from "react";
+import { FileBox } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DataNav } from "@/utils/dataNav";
-import { useWindowSize } from "@uidotdev/usehooks";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
@@ -12,12 +12,37 @@ import { useAuth } from "@clerk/nextjs";
 const HeaderMobile = dynamic(() => import("./HeaderMobile"), { ssr: false });
 
 const HomePageHeader = () => {
-  const { width } = useWindowSize();
   const { push } = useRouter();
   const { isSignedIn } = useAuth();
+
+  const [isHidden, setIsHidden] = useState(false);
+  const { scrollY } = useScroll();
+  const lastYRef = useRef(0);
+
+  useMotionValueEvent(scrollY, "change", (y) => {
+    const difference = y - lastYRef.current;
+
+    if (Math.abs(difference) > 50) {
+      setIsHidden(difference > 0);
+
+      lastYRef.current = y;
+    }
+  });
   return (
     <>
-      {width !== null && width > 768 ? (
+      <motion.div
+        animate={isHidden ? "hidden" : "visible"}
+        transition={{ duration: 0.2 }}
+        variants={{
+          hidden: {
+            y: "-100%",
+          },
+          visible: {
+            y: "0%",
+          },
+        }}
+        className="fixed top-0 z-10 w-full bg-white"
+      >
         <div className="container hidden md:flex justify-between items-center py-6">
           <div className="flex space-x-1 items-center">
             <FileBox size={20} className="text-primary" />
@@ -53,9 +78,8 @@ const HomePageHeader = () => {
             )}
           </div>
         </div>
-      ) : (
         <HeaderMobile />
-      )}
+      </motion.div>
     </>
   );
 };

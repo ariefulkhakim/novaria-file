@@ -49,7 +49,7 @@ const ContactUsScreen = () => {
   return (
     <div id="contact" className="my-40">
       <div className="container">
-        <div className="flex flex-col w-full justify-center items-center gap-3">
+        <div className="flex flex-col w-full justify-center items-center text-center gap-3">
           <h2 className="text-[32px] font-semibold">Contact Us</h2>
           <p>
             If you have any questions or need assistance, do not hesitate to

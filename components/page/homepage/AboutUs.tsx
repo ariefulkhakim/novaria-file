@@ -5,7 +5,7 @@ import AboutUsImage from "@/assets/svg/about-us.svg";
 const AboutUsScreen = () => {
   return (
     <div id="about-us" className="my-40 mt-20">
-      <div className="container grid grid-cols-6 gap-10 place-items-center">
+      <div className="container grid grid-cols-1 md:grid-cols-6 gap-10 place-items-center">
         <div className="col-span-2 place-self-end">
           <Image
             src={AboutUsImage}

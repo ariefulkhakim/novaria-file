@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 
 const HeroBanner = () => {
   return (
-    <div className="flex w-full justify-center my-5">
+    <div className="flex w-full justify-center my-10 lg:mt-28">
       <div className="flex flex-col justify-center items-center py-20 text-center">
         <Image src={ImgHero} alt="Hero_Banner_Image" width={400} height={400} />
-        <h1 className="text-[45px] font-semibold my-5">
+        <h1 className="text-[36px] font-semibold my-5">
           Manage Your Files Easily and Securely
         </h1>
         <p className=" text-gray-600 font-light leading-7 w-2/3">
